@@ -1,6 +1,6 @@
 # Welcome to Magento Cheatsheet for Ubuntu
 
-### Install latest `php`
+### Install latest __php__
 ```sh
 sudo apt update
 sudo apt upgrade
@@ -12,14 +12,14 @@ git php7.3-fpm nginx php7.3-mbstring vim -y
 > If you want to install apache server then replace `nginx` with `apache2` in the above command.
 
 
-### Install `composer`
+### Install __composer__
 ```sh
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
 
 
 
-### Create Virtual Host `nginx`
+### Create Virtual Host __nginx__
 ```sh
 sudo bash -c 'echo "upstream fastcgi_backend {
     # use tcp connection
@@ -42,7 +42,7 @@ server {
 
 > If you have more than one magento project for `Nginx` Then you can ignore `upstream fastcgi_backend` node for later project's virtual host.
 
-### Create Virtual Host `apache`
+### Create Virtual Host __apache__
 ```sh
 sudo bash -c 'echo "<VirtualHost *:80>
 	ServerName website.com
@@ -57,7 +57,7 @@ sudo bash -c 'echo "<VirtualHost *:80>
 </VirtualHost>" > /etc/apache2/sites-enabled/website.com"
 ```
 
-### Restart `Server`
+### Restart __Server__
 ```sh
 # for apache
 sudo service apache2 restart
@@ -66,13 +66,13 @@ sudo service nginx restart
 sudo service php7.3-fpm restart # if required
 ```
 
-### Create `Project Directory and give webserver permission`
+### Create __Project Directory and give webserver permission__
 ```sh
 sudo mkdir /var/www/website.com;
 sudo chown -R .www-data /var/www/website.com;
 ```
 
-### Set global `magento2 token for composer`
+### Set global __magento2 token for composer__
 ```sh
 composer.phar global config http-basic.repo.magento.com <public_key> <private_key>
 # Example
@@ -80,13 +80,13 @@ composer global config http-basic.repo.magento.com f92d6b866405d0799d86b41ffe00e
 378bc0e72c91dcaa404266bdf87ee962
 ```
 
-### Install `Magento Project`
+### Install __Magento Project__
 ```sh
 cd /var/www/website.com
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.3.3 .
 ```
 
-### Give Project file specific `Permission`
+### Give Project file specific __Permission__
 ```sh
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
 find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
@@ -94,7 +94,7 @@ chown -R :www-data .
 chmod u+x bin/magento
 ```
 
-### Create `Database`
+### Create __Database__
 ```sh
 sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'"; #ubuntu18.04
 mysql -uroot -p -e "CREATE DATABASE project_database";
