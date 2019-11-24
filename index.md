@@ -38,6 +38,8 @@ server {
 }" > /etc/nginx/sites-enabled/website.com'
 ```
 
+> If you have more than one magento project for `Nginx` Then you can ignore `upstream fastcgi_backend` node for later project's virtual host.
+
 ### Create Virtual Host `apache`
 ```sh
 sudo bash -c 'echo "<VirtualHost *:80>
