@@ -1,6 +1,16 @@
 # Welcome to Magento Cheatsheet for Ubuntu
 
-### Install latest __php__
+## Working List
+[x] Install PHP
+[x] Install Composer
+[x] Install Virtual Host(Nginx)
+[x] Install Virtual Host(Apache)
+[x] Set up Project Directory & Permission
+[x] Get Magento Project
+[x] Create Database
+[x] [Install Magento Project via cli](#install-magento-project-from-cli)
+
+### Install Nignx/Apache, PHP & MYsql
 ```sh
 sudo apt update
 sudo apt upgrade
@@ -12,14 +22,14 @@ git php7.3-fpm nginx php7.3-mbstring vim -y
 > If you want to install apache server then replace `nginx` with `apache2` in the above command.
 
 
-### Install __composer__
+### Install composer
 ```sh
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
 
 
 
-### Create Virtual Host __nginx__
+### Create Virtual Host nginx
 ```sh
 sudo bash -c 'echo "upstream fastcgi_backend {
     # use tcp connection
@@ -42,7 +52,7 @@ server {
 
 > If you have more than one magento project for `Nginx` Then you can ignore `upstream fastcgi_backend` node for later project's virtual host.
 
-### Create Virtual Host __apache__
+### Create Virtual Host apache
 ```sh
 sudo bash -c 'echo "<VirtualHost *:80>
 	ServerName website.com
@@ -57,7 +67,7 @@ sudo bash -c 'echo "<VirtualHost *:80>
 </VirtualHost>" > /etc/apache2/sites-enabled/website.com"
 ```
 
-### Restart __Server__
+### Restart Server
 ```sh
 # for apache
 sudo service apache2 restart
@@ -66,13 +76,13 @@ sudo service nginx restart
 sudo service php7.3-fpm restart # if required
 ```
 
-### Create __Project Directory and give webserver permission__
+### Create Project Directory and give webserver permission
 ```sh
 sudo mkdir /var/www/website.com;
 sudo chown -R .www-data /var/www/website.com;
 ```
 
-### Set global __magento2 token for composer__
+### Set global magento2 token for composer
 ```sh
 composer.phar global config http-basic.repo.magento.com <public_key> <private_key>
 # Example
@@ -80,13 +90,13 @@ composer global config http-basic.repo.magento.com f92d6b866405d0799d86b41ffe00e
 378bc0e72c91dcaa404266bdf87ee962
 ```
 
-### Install __Magento Project__
+### Get Magento Project Via Composer
 ```sh
 cd /var/www/website.com
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.3.3 .
 ```
 
-### Give Project file specific __Permission__
+### Give Project file specific Permission
 ```sh
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
 find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
@@ -94,13 +104,13 @@ chown -R :www-data .
 chmod u+x bin/magento
 ```
 
-### Create __Database__
+### Create Database
 ```sh
 sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'"; #ubuntu18.04
 mysql -uroot -p -e "CREATE DATABASE project_database";
 ```
 
-### Install Magento Project from cli
+### Install Magento Project via cli
 ```sh
 bin/magento setup:install --base-url=http://tutorial.magento2.dev \
 --db-host=localhost \
