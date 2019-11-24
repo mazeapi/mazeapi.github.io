@@ -40,7 +40,26 @@ server {
 
 ### Create Virtual Host `apache`
 ```sh
+sudo bash -c 'echo "<VirtualHost *:80>
+	ServerName website.com
+	ServerAlias www.website.com
+	DocumentRoot /var/www/website.com
+	<Directory /var/www/website.com>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Require all granted
+	</Directory> 
+	ErrorLog /var/www/website.com/error.log
+</VirtualHost>" > /etc/apache2/sites-enabled/website.com"
+```
 
+### Restart `Server`
+```sh
+# for apache
+sudo service apache2 restart
+# for nginx
+sudo service nginx restart
+sudo service php7.3-fpm restart # if required
 ```
 
 ### Create `Project Directory and give webserver permission`
