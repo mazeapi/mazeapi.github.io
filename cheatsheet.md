@@ -35,3 +35,13 @@ php bin/magento setup:static-content:deploy sv_SE -a adminhtml
 ```sh
 placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
 ```
+
+### Get __magento__ cron job list
+```sh
+wget https://files.magerun.net/n98-magerun2.phar
+chmod +x ./n98-magerun2.phar; 
+./n98-magerun2.phar --version
+./n98-magerun2.phar sys:cron:list
+```
+
+
