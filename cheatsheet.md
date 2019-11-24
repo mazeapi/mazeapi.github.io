@@ -1,6 +1,6 @@
 ## Some cheatsheet for Development
 
-### Nginx `redirect`
+### Nginx redirect
 ```sh
 server {
     server_name partexfurniture.com;
@@ -8,13 +8,13 @@ server {
 }
 ```
 
-### Magento `profiler`
+### Magento profiler
 ```sh
 $_SERVER['MAGE_PROFILER'] = 'html';
 # at beginning of index.php page
 ```
 
-### Ubuntu `usergroup`
+### Ubuntu usergroup
 ```sh
 usermod -g primarygroupname username
 usermod -a -G secondarygroupname username
@@ -23,7 +23,7 @@ usermod -a -G secondarygroupname username
 # -a (Add the user to the supplementary group(s))
 ```
 
-### Magento `quick deploy`
+### Magento quick deploy
 ```sh
 php bin/magento deploy:mode:set production --skip-compilation
 php bin/magento setup:static-content:deploy sv_SE -a frontend
@@ -31,12 +31,12 @@ php bin/magento setup:static-content:deploy en_US -a adminhtml
 php bin/magento setup:static-content:deploy sv_SE -a adminhtml
 ```
 
-### Password `placeholder` as password
+### Password placeholder as password
 ```sh
 placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
 ```
 
-### Get __magento__ cron job list
+### Get magento cron job list
 ```sh
 wget https://files.magerun.net/n98-magerun2.phar
 chmod +x ./n98-magerun2.phar; 
@@ -59,6 +59,15 @@ sudo mkswap /swapfile;
 sudo swapon /swapfile;
 echo '/swapfile swap swap sw 0 0' | sudo tee -a /etc/fstab
 ```
-
+### Turn off input[number] spinners
+```sh
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+```
 
 
