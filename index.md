@@ -1,21 +1,9 @@
 # Welcome to Magento Cheatsheet for Ubuntu
 
-## Working List
-[x] Install PHP
-[x] Install Composer
-[x] Install Virtual Host(Nginx)
-[x] Install Virtual Host(Apache)
-[x] Set up Project Directory & Permission
-[x] Get Magento Project
-[x] Create Database
-[x] [Install Magento Project via cli](#install-magento-project-from-cli)
-
-### Install Nignx/Apache, PHP & MYsql
+### Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
-sudo apt update
-sudo apt upgrade
 sudo add-apt-repository ppa:ondrej/php
-sudo apt update;sudo apt install php7.3 php7.3-soap php7.3-zip php7.3-curl \
+sudo apt install php7.3 php7.3-soap php7.3-zip php7.3-curl \
 php7.3-xml php7.3-gd php7.3-intl php7.3-bcmath php7.3-mysql mysql-server \ 
 git php7.3-fpm nginx php7.3-mbstring vim -y
 ```
