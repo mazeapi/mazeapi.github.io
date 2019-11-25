@@ -16,6 +16,10 @@ valet start
 brew install mysql@5.7
 brew services start mysql@5.7
 valet use php@7.2
+# secure site
+valet secure laravel
+# unsecure site
+valet unsecure laravel
 ```
 > `>>` append end of the file
 > `>` override everuthing
