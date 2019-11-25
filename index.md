@@ -112,5 +112,20 @@ bin/magento setup:install --base-url=http://tutorial.magento2.dev \
 --timezone=America/Chicago \
 --use-rewrites=1
 ```
+### Auto start Lemp/Lamp services
+```sh
+sudo systemctl enable apapche2;
+sudo systemctl enable php7.3-fpm;
+sudo systemctl enable nginx;
+sudo systemctl enable mysql;
+```
+### Swap memory for Ubuntu
+```sh
+sudo fallocate -l 1G /swapfile;
+sudo chmod 600 /swapfile;
+sudo mkswap /swapfile;
+sudo swapon /swapfile;
+echo '/swapfile swap swap sw 0 0' | sudo tee -a /etc/fstab
+```
 
 
