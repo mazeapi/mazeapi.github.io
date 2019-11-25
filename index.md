@@ -2,17 +2,15 @@
 
 ### Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
-sudo add-apt-repository ppa:ondrej/php
-sudo apt install php7.3 php7.3-soap php7.3-zip php7.3-curl \
-php7.3-xml php7.3-gd php7.3-intl php7.3-bcmath php7.3-mysql mysql-server \ 
-git php7.3-fpm nginx php7.3-mbstring vim -y
+sudo add-apt-repository ppa:ondrej/php;
+sudo apt install php7.3 php7.3-soap php7.3-zip php7.3-curl php7.3-xml php7.3-gd php7.3-intl php7.3-bcmath php7.3-mysql mysql-server php7.3-fpm nginx php7.3-mbstring git vim zip htop -y;
 ```
 > If you want to install apache server then replace `nginx` with `apache2` in the above command.
 
 
 ### Install composer
 ```sh
-curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer;
 ```
 
 
@@ -58,9 +56,9 @@ sudo bash -c 'echo "<VirtualHost *:80>
 ### Restart Server
 ```sh
 # for apache
-sudo service apache2 restart
+sudo service apache2 restart;
 # for nginx
-sudo service nginx restart
+sudo service nginx restart;
 sudo service php7.3-fpm restart # if required
 ```
 
@@ -74,8 +72,7 @@ sudo chown -R .www-data /var/www/website.com;
 ```sh
 composer.phar global config http-basic.repo.magento.com <public_key> <private_key>
 # Example
-composer global config http-basic.repo.magento.com f92d6b866405d0799d86b41ffe00e342 \ 
-378bc0e72c91dcaa404266bdf87ee962
+composer global config http-basic.repo.magento.com f92d6b866405d0799d86b41ffe00e342 378bc0e72c91dcaa404266bdf87ee961
 ```
 
 ### Get Magento Project Via Composer
@@ -86,15 +83,15 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 
 ### Give Project file specific Permission
 ```sh
-find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
-find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
-chown -R :www-data .
-chmod u+x bin/magento
+find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +;
+find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +;
+chown -R :www-data .;
+chmod u+x bin/magento;
 ```
 
 ### Create Database
 ```sh
-sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'"; #ubuntu18.04
+sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'";
 mysql -uroot -p -e "CREATE DATABASE project_database";
 ```
 
