@@ -70,4 +70,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ```
 
+### Composer Issue
+```sh
+composer install --ignore-platform-reqs
+php -d memory_limit=-1 /usr/local/bin/composer install
+```
+
 
