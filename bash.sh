@@ -19,7 +19,7 @@ sudo systemctl enable nginx;
 sudo systemctl enable mysql;
 
 sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'";
-mysql -uroot -p -e "CREATE DATABASE project_database";
+mysql -uroot -p -e "CREATE DATABASE $database";
 
 
 sudo service apache2 restart;
@@ -29,6 +29,18 @@ composer global config http-basic.repo.magento.com f92d6b866405d0799d86b41ffe00e
 
 cd /var/www/$website;
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.3.3 .;
+
+sudo bash -c 'echo "<VirtualHost *:80>
+	ServerName $website
+	ServerAlias www."'$website'"
+	DocumentRoot /var/www/"'$website'"
+	<Directory /var/www/"'$website'">
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Require all granted
+	</Directory> 
+	ErrorLog /var/www/"'$website'"/error.log
+</VirtualHost>" > /etc/apache2/sites-enabled/'$website'.conf'
 
 bin/magento setup:install --base-url=http://tutorial.magento2.dev \
 --db-host=localhost \
