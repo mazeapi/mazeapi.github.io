@@ -31,7 +31,7 @@ cd /var/www/$website;
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.3.3 .;
 
 sudo bash -c 'echo "<VirtualHost *:80>
-	ServerName $website
+	ServerName "'$website'"
 	ServerAlias www."'$website'"
 	DocumentRoot /var/www/"'$website'"
 	<Directory /var/www/"'$website'">
