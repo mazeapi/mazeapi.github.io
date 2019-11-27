@@ -58,6 +58,13 @@ sudo chmod 600 /swapfile;
 sudo mkswap /swapfile;
 sudo swapon /swapfile;
 echo '/swapfile swap swap sw 0 0' | sudo tee -a /etc/fstab
+# Desktop
+sudo swapoff -a;
+sudo dd if=/dev/zero of=/swapfile bs=1G count=4;#4GB swapfile
+sudo mkswap /swapfile;
+sudo swapon /swapfile;
+
+
 ```
 ### Turn off input[number] spinners
 ```sh
