@@ -8,6 +8,10 @@ sudo apt install php7.3 php7.3-soap php7.3-zip php7.3-curl php7.3-xml php7.3-gd 
 ```
 > If you want to install apache server then replace `nginx` with `apache2` in the above command.
 
+### Switch default php version
+```sh
+$ sudo update-alternatives --set php /usr/bin/php7.3
+```
 
 ### Install composer
 ```sh
@@ -130,7 +134,7 @@ sudo swapon /swapfile;
 echo '/swapfile swap swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
-### Delele all existing products from SQL
+### Delele all existing products & categories from Database
 ```sh
 delete from catalog_product_entity;
 
