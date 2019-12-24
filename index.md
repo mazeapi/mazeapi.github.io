@@ -169,4 +169,58 @@ DELETE FROM url_rewrite WHERE entity_type = 'category';
 SET FOREIGN_KEY_CHECKS = 1;
 ```
 
+### Nginx general configuration
+```sh
+server {
+    listen 80;
+    server_name www.domain.com domain.com;
+
+    root /home/ubuntu/domain.com;
+    index index.php;
+
+
+    # log files
+    access_log /home/ubuntu/domain.com/access.log;
+    error_log /home/ubuntu/domain.com/error.log;
+
+    location = /favicon.ico {
+        log_not_found off;
+        access_log off;
+    }
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+    }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+        expires max;
+        log_not_found off;
+    }
+
+}
+```
+
+### Installing Certbot
+```sh
+sudo add-apt-repository ppa:certbot/certbot
+
+sudo apt-get update
+
+sudo apt-get install python-certbot-nginx
+
+sudo certbot --nginx -d example.com -d www.example.com
+
+```
+
 
