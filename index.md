@@ -113,6 +113,7 @@ bin/magento setup:install --base-url=http://tutorial.magento2.dev \
 --admin-email=user@example.com \
 --admin-user=admin \
 --admin-password=your_project_password \
+--backend-frontname=admin123 \
 --language=en_US \
 --currency=USD \
 --timezone=America/Chicago \
