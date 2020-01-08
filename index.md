@@ -223,4 +223,18 @@ sudo certbot --nginx -d example.com -d www.example.com
 
 ```
 
+### Php error reporting
+```sh
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+```
+
+### Magento get Sample Data
+```sh
+$ wget https://github.com/magento/magento2-sample-data/archive/2.3.3.zip -O sampledata.zip
+$ unzip sampledata.zip
+$ php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php -- --ce-source="<path_to_your_magento_instance>"
+$ sudo chmod -R 777 <sample-data_clone_dir>/pub
+```
+
 
