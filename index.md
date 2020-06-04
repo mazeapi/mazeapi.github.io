@@ -241,6 +241,7 @@ $ sudo chmod -R 777 <sample-data_clone_dir>/pub
 ### Varnish Magento 2
 ```sh
 $ sudo apt install varnish -y
+$ varnish -V
 $ systemctl start varnish
 $ systemctl enable varnish
 $ sudo netstat -putln | grep varnishd
@@ -254,6 +255,14 @@ $ sudo vi /etc/apache2/ports.conf
 # For nginx
 # set port 8080 in your virtual host
 
+$ sudo vi  /etc/default/varnish
+# set VARNISH_LISTEN_PORT=80
+# replace -a param in DAEMON_OPTS
+DAEMON_OPTS="-a :80 \
+   -T localhost:6082 \
+   -f /etc/varnish/default.vcl \
+   -S /etc/varnish/secret \
+   -s malloc,256m"
 $ sudo sudo cp /etc/varnish/default.vcl /etc/varnish/default.vcl.bak
 # export magento varnish configurations file
 $ sudo vi /etc/varnish/default.vcl
@@ -264,6 +273,14 @@ $ sudo vi /lib/systemd/system/varnish.service
 # ExecStart=/usr/sbin/varnishd -j unix,user=vcache -F -a :80 -T localhost:6082 -f /etc/varnish/default.vcl -S /etc/varnish/secret -s malloc,256m
 $ sudo systemctl daemon-reload
 $ sudo systemctl restart varnish
+
+# --------------
+# apache ssl config
+
+# if you have redirect issue arise remove rewrite condition in apache2 virtual hosts
+
+# ------------
+# nginx ssl config
 ```
 
 ### Elastic search 6.x
