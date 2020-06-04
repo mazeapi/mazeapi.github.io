@@ -247,10 +247,14 @@ $ systemctl enable varnish
 $ sudo netstat -putln | grep varnishd
 
 # For apache
+$ sudo a2enmod proxy  
+$ sudo a2enmod proxy_http 
+$ sudo a2enmod headers
 $ sudo vi /etc/apache2/ports.conf
 # set listen 8080 instead of 80
 # in your virtual host set 8080 as port
 <VirtualHost *:8080>
+$ sudo systemctl restart apache2
 
 # For nginx
 # set port 8080 in your virtual host
@@ -276,6 +280,19 @@ $ sudo systemctl restart varnish
 
 # --------------
 # apache ssl config
+<VirtualHost *:443>
+    RequestHeader set X-Forwarded-Proto "https"
+    ServerName server.com
+
+    SSLEngine On
+    SSLCertificateFile /etc/letsencrypt/live/server.com/fullchain.pem
+	SSLCertificateKeyFile /etc/letsencrypt/live/server.com/privkey.pem
+	Include /etc/letsencrypt/options-ssl-apache.conf
+
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:80/
+    ProxyPassReverse / http://127.0.0.1:80/
+</VirtualHost>
 
 # if you have redirect issue arise remove rewrite condition in apache2 virtual hosts
 
