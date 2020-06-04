@@ -238,6 +238,34 @@ $ php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php -- --ce-source=
 $ sudo chmod -R 777 <sample-data_clone_dir>/pub
 ```
 
+### Varnish Magento 2
+```sh
+$ sudo apt install varnish -y
+$ systemctl start varnish
+$ systemctl enable varnish
+$ sudo netstat -putln | grep varnishd
+
+# For apache
+$ sudo vi /etc/apache2/ports.conf
+# set listen 8080 instead of 80
+# in your virtual host set 8080 as port
+<VirtualHost *:8080>
+
+# For nginx
+# set port 8080 in your virtual host
+
+$ sudo sudo cp /etc/varnish/default.vcl /etc/varnish/default.vcl.bak
+# export magento varnish configurations file
+$ sudo vi /etc/varnish/default.vcl
+# paste in it
+# set .host = "127.0.0.1" .port = "8080"
+$ sudo vi /lib/systemd/system/varnish.service
+# Then change the varnish port 6081 to HTTP port 80
+# ExecStart=/usr/sbin/varnishd -j unix,user=vcache -F -a :80 -T localhost:6082 -f /etc/varnish/default.vcl -S /etc/varnish/secret -s malloc,256m
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart varnish
+```
+
 ### Elastic search 6.x
 ```sh
 $ sudo apt-get install default-jre
