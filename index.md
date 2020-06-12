@@ -302,13 +302,13 @@ $ sudo systemctl restart varnish
 
 ### Elastic search 6.x
 ```sh
-$ sudo apt-get install default-jre
+$ sudo apt-get install default-jre -y
 $ java -version
-$ wget -qO – https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add –
+$ curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 $ sudo apt-get install apt-transport-https
 $ echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 $ sudo apt-get update
-$ sudo apt-get install elasticsearch
+$ sudo apt-get install elasticsearch -y
 $ sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install analysis-icu
 $ sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install analysis-phonetic
 $ sudo -i service elasticsearch start
