@@ -318,3 +318,49 @@ $ sudo vi /etc/elasticsearch/elasticsearch.yml
 # Adding the code "indices.query.bool.max_clause_count: 10024" on the bottom of the page.
 $ curl -XGET 'http://localhost:9200/_cat/health?v&pretty'
 ```
+
+### Webhook
+```sh
+$ sudo apt install webhook supervisor -y
+$ sudo systemctl stop webhook
+$ whoami
+# {username}
+$ mkdir ~/webhooks
+$ mkdir ~/webhooks/deployment
+$ touch ~/webhooks/hooks.json
+$ touch ~/webhooks/deployment/deploy.sh
+$ chmod +x ~/webhooks/deployment/deploy.sh
+$ vi ~/webhooks/deployment/deploy.sh
+
+#!/bin/bash
+
+git fetch --all
+git checkout --force "origin/master"
+
+$ vi ~/webhooks/hooks.json
+
+[
+  {
+    "id": "website-webhook",
+    "execute-command": "/home/ubuntu/webhooks/deployment/deploy.sh",
+    "command-working-directory": "/home/ubuntu/example.com",
+    "response-message": "Executing deploy script..."
+  }
+]
+
+$ sudo vi /etc/supervisor/conf.d/webhook.conf
+
+[program:webhooks]
+command=bash -c "/usr/bin/webhook -hooks /home/ubuntu/webhooks/hooks.json -verbose"
+redirect_stderr=true
+autostart=true
+autorestart=true
+user=ubuntu
+numprocs=1
+process_name=%(program_name)s_%(process_num)s
+stdout_logfile=/home/ubuntu/hooks/supervisor.log
+environment=HOME="/home/ubuntu",USER="ubuntu"
+
+$ sudo systemctl enable supervisor
+$ sudo systemctl restart supervisor 
+```
