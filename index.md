@@ -358,9 +358,14 @@ autorestart=true
 user=ubuntu
 numprocs=1
 process_name=%(program_name)s_%(process_num)s
-stdout_logfile=/home/ubuntu/hooks/supervisor.log
+stdout_logfile=/home/ubuntu/webhooks/supervisor.log
 environment=HOME="/home/ubuntu",USER="ubuntu"
 
 $ sudo systemctl enable supervisor
 $ sudo systemctl restart supervisor 
+
+Add webhook in you git project settings
+http://id:9000/hooks/{hook_id}
+http://111.222.178.598:9000/hooks/website-webhook
+
 ```
