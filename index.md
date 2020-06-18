@@ -334,8 +334,11 @@ $ vi ~/webhooks/deployment/deploy.sh
 
 #!/bin/bash
 
-git fetch --all
-git checkout --force "origin/master"
+git pull origin master
+# composer dumpautoload
+# php artisan c:c
+# php bin/magento c:f
+# rm -rf generated/*
 
 $ vi ~/webhooks/hooks.json
 
