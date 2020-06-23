@@ -372,3 +372,13 @@ http://id:9000/hooks/{hook_id}
 http://111.222.178.598:9000/hooks/website-webhook
 
 ```
+
+## Nginx 302 bad gateway
+```sh
+$ sudo vi /etc/nginx/nginx.conf
+in http node add
+fastcgi_buffers 16 16k; 
+fastcgi_buffer_size 32k;
+
+$ sudo service nginx reload/restart
+```
