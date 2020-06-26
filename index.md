@@ -135,6 +135,13 @@ sudo swapon /swapfile;
 echo '/swapfile swap swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
+### Deploy Magento 2 project
+```sh
+$ php bin/magento deploy:mode:set production --skip-compilation
+$ php bin/magento setup:static-content:deploy sv_SE -a frontend
+$ php bin/magento setup:static-content:deploy en_US -a adminhtml
+```
+
 ### Delele all existing products & categories from Database
 ```sh
 delete from catalog_product_entity;
