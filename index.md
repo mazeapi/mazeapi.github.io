@@ -1,14 +1,14 @@
 # Welcome MAZEAPI.COM
 
 ## Go to:
-1.  :arrow_forward:[Install server](#1)
-2.  :arrow_forward:[Switch default php version](#2)
-3.  :arrow_forward:[Install composer](#3)
-4.  :arrow_forward:[Magento nginx virtual host config](#4)
-5.  :arrow_forward:[Magento apache virtual host config](#5)
-6.  :arrow_forward:[Set Magento composer token](#6)
-7.  :arrow_forward:[Download Magento via composer](#7)
-8.  :arrow_forward:[Set project file permission](#8)
+1.  :arrow_forward: [Install server](#1)
+2.  :arrow_forward: [Switch default php version](#2)
+3.  :arrow_forward: [Install composer](#3)
+4.  :arrow_forward: [Magento nginx virtual host config](#4)
+5.  :arrow_forward: [Magento apache virtual host config](#5)
+6.  :arrow_forward: [Set Magento composer token](#6)
+7.  :arrow_forward: [Download Magento via composer](#7)
+8.  :arrow_forward: [Set project file permission](#8)
 
 ### <a name="1"></a>Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
@@ -269,15 +269,14 @@ $ sudo a2enmod proxy_http
 $ sudo a2enmod headers
 $ sudo vi /etc/apache2/ports.conf
 ```
-*set listen 8080 instead of 80*
+**set listen 8080 instead of 80**
 **in your virtual host set 8080 as port**
 ```sh
 <VirtualHost *:8080>
 
 $ sudo systemctl restart apache2
 ```
-# For nginx
-# set port 8080 in your virtual host
+**For nginx -set port 8080 in your virtual host**
 
 ```sh
 $ sudo vi  /etc/default/varnish
@@ -317,9 +316,8 @@ $ sudo systemctl restart varnish
 ```
 **if you have redirect issue arise remove rewrite condition in apache2 virtual hosts**
 
-# ------------
-*nginx ssl config*
-in server node
+**nginx ssl config**
+> in server node
 ```sh
 location / {
         proxy_pass http://127.0.0.1:80;
@@ -413,8 +411,9 @@ environment=HOME="/home/ubuntu",USER="ubuntu"
 
 $ sudo systemctl enable supervisor
 $ sudo systemctl restart supervisor 
-
-Add webhook in you git project settings
+```
+**Add webhook in you git project settings**
+```sh
 http://id:9000/hooks/{hook_id}
 http://111.222.178.598:9000/hooks/website-webhook
 
