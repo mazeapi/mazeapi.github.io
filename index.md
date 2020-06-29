@@ -1,6 +1,16 @@
-# Welcome to Magento Cheatsheet for Ubuntu
+# Welcome MAZEAPI.COM
 
-### Install Nignx/Apache, PHP, Mysql & other utilities
+## Go to:
+1.[Install server](#1)
+2.[Switch default php version](#2)
+3.[Install composer](#3)
+4.[Magento nginx virtual host config](#4)
+5.[Magento apache virtual host config](#5)
+6.[Set Magento composer token](#6)
+7.[Download Magento via composer](#7)
+8.[Set project file permission](#8)
+
+### <a name="1"></a>Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
 sudo apt update
 sudo add-apt-repository ppa:ondrej/php;
@@ -8,19 +18,19 @@ sudo apt install php7.3 php7.3-soap php7.3-zip php7.3-curl php7.3-xml php7.3-gd 
 ```
 > If you want to install apache server then replace `nginx` with `apache2` in the above command.
 
-### Switch default php version
+### <a name="2"></a>Switch default php version
 ```sh
 $ sudo update-alternatives --set php /usr/bin/php7.3
 ```
 
-### Install composer
+### <a name="3"></a>Install composer
 ```sh
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer;
 ```
 
 
 
-### Create Virtual Host nginx
+### <a name="4"></a>Create Virtual Host nginx
 ```sh
 sudo bash -c 'echo "upstream fastcgi_backend {
     # use tcp connection
@@ -43,7 +53,7 @@ server {
 
 > If you have more than one magento project for `Nginx` Then you can ignore `upstream fastcgi_backend` node for later project's virtual host.
 
-### Create Virtual Host apache
+### <a name="5"></a>Create Virtual Host apache
 ```sh
 sudo bash -c 'echo "<VirtualHost *:80>
 	ServerName website.com
@@ -73,7 +83,7 @@ sudo mkdir /var/www/website.com;
 sudo chown -R .www-data /var/www/website.com;
 ```
 
-### Set global magento2 token for composer
+### <a name="6"></a>Set global magento2 token for composer
 ```sh
 sudo chown -R ubuntu ~/.composer
 composer.phar global config http-basic.repo.magento.com <public_key> <private_key>
@@ -81,13 +91,13 @@ composer.phar global config http-basic.repo.magento.com <public_key> <private_ke
 composer global config http-basic.repo.magento.com f92d6b866405d0799d86b41ffe00e342 378bc0e72c91dcaa404266bdf87ee961
 ```
 
-### Get Magento Project Via Composer
+### <a name="7"></a>Get Magento Project Via Composer
 ```sh
 cd /var/www/website.com
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.3.3 .
+composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.3.5-p1 .
 ```
 
-### Give Project file specific Permission
+### <a name="8"></a>Give Project file specific Permission
 ```sh
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +;
 find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +;
