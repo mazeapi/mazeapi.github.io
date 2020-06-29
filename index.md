@@ -268,14 +268,18 @@ $ sudo a2enmod proxy
 $ sudo a2enmod proxy_http 
 $ sudo a2enmod headers
 $ sudo vi /etc/apache2/ports.conf
-# set listen 8080 instead of 80
-# in your virtual host set 8080 as port
+```
+*set listen 8080 instead of 80*
+**in your virtual host set 8080 as port**
+```sh
 <VirtualHost *:8080>
-$ sudo systemctl restart apache2
 
+$ sudo systemctl restart apache2
+```
 # For nginx
 # set port 8080 in your virtual host
 
+```sh
 $ sudo vi  /etc/default/varnish
 # set VARNISH_LISTEN_PORT=80
 # replace -a param in DAEMON_OPTS
@@ -294,9 +298,9 @@ $ sudo vi /lib/systemd/system/varnish.service
 # ExecStart=/usr/sbin/varnishd -j unix,user=vcache -F -a :80 -T localhost:6082 -f /etc/varnish/default.vcl -S /etc/varnish/secret -s malloc,256m
 $ sudo systemctl daemon-reload
 $ sudo systemctl restart varnish
-
-# --------------
-*apache ssl config*
+```
+**apache ssl config**
+```sh
 <VirtualHost *:443>
     RequestHeader set X-Forwarded-Proto "https"
     ServerName server.com
@@ -310,12 +314,13 @@ $ sudo systemctl restart varnish
     ProxyPass / http://127.0.0.1:80/
     ProxyPassReverse / http://127.0.0.1:80/
 </VirtualHost>
-
-# if you have redirect issue arise remove rewrite condition in apache2 virtual hosts
+```
+**if you have redirect issue arise remove rewrite condition in apache2 virtual hosts**
 
 # ------------
 *nginx ssl config*
 in server node
+```sh
 location / {
         proxy_pass http://127.0.0.1:80;
         proxy_set_header Host $http_host;
@@ -330,7 +335,7 @@ location / {
     }
     
 ```
-*Final verification(Header in development mode):*
+**Final verification(Header in development mode):**
 ```sh
 X-Magento-Cache-Control: max-age=86400, public, s-maxage=86400
 Age: 0
