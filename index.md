@@ -1,14 +1,14 @@
 # Welcome MAZEAPI.COM
 
 ## Go to:
-1. [Install server](#1)
-2. [Switch default php version](#2)
-3. [Install composer](#3)
-4. [Magento nginx virtual host config](#4)
-5. [Magento apache virtual host config](#5)
-6. [Set Magento composer token](#6)
-7. [Download Magento via composer](#7)
-8. [Set project file permission](#8)
+1.  :arrow_forward:[Install server](#1)
+2.  :arrow_forward:[Switch default php version](#2)
+3.  :arrow_forward:[Install composer](#3)
+4.  :arrow_forward:[Magento nginx virtual host config](#4)
+5.  :arrow_forward:[Magento apache virtual host config](#5)
+6.  :arrow_forward:[Set Magento composer token](#6)
+7.  :arrow_forward:[Download Magento via composer](#7)
+8.  :arrow_forward:[Set project file permission](#8)
 
 ### <a name="1"></a>Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
@@ -296,7 +296,7 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl restart varnish
 
 # --------------
-# apache ssl config
+*apache ssl config*
 <VirtualHost *:443>
     RequestHeader set X-Forwarded-Proto "https"
     ServerName server.com
@@ -314,7 +314,7 @@ $ sudo systemctl restart varnish
 # if you have redirect issue arise remove rewrite condition in apache2 virtual hosts
 
 # ------------
-# nginx ssl config
+*nginx ssl config*
 in server node
 location / {
         proxy_pass http://127.0.0.1:80;
@@ -330,7 +330,7 @@ location / {
     }
     
 ```
-`Final verification(Header in development mode):`
+*Final verification(Header in development mode):*
 ```sh
 X-Magento-Cache-Control: max-age=86400, public, s-maxage=86400
 Age: 0
