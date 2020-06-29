@@ -305,7 +305,32 @@ $ sudo systemctl restart varnish
 
 # ------------
 # nginx ssl config
+in server node
+location / {
+        proxy_pass http://127.0.0.1:80;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Ssl-Offloaded "1";
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-Port 443;
+        proxy_redirect http://website.com/  /;
+        proxy_http_version 1.1;
+    }
+    
 ```
+`Final verification(Header in development mode):`
+```sh
+X-Magento-Cache-Control: max-age=86400, public, s-maxage=86400
+Age: 0
+X-Magento-Cache-Debug: MISS
+
+# Also acceptable value
+X-Magento-Cache-Debug: HIT
+```
+
+
 
 ### Elastic search 6.x
 ```sh
