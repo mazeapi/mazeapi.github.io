@@ -1,14 +1,14 @@
 # Welcome MAZEAPI.COM
 
 ## Go to:
-1.[Install server](#1)
-2.[Switch default php version](#2)
-3.[Install composer](#3)
-4.[Magento nginx virtual host config](#4)
-5.[Magento apache virtual host config](#5)
-6.[Set Magento composer token](#6)
-7.[Download Magento via composer](#7)
-8.[Set project file permission](#8)
+1. [Install server](#1)
+2. [Switch default php version](#2)
+3. [Install composer](#3)
+4. [Magento nginx virtual host config](#4)
+5. [Magento apache virtual host config](#5)
+6. [Set Magento composer token](#6)
+7. [Download Magento via composer](#7)
+8. [Set project file permission](#8)
 
 ### <a name="1"></a>Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
