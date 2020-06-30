@@ -114,17 +114,17 @@ mysql -uroot -p -e "CREATE DATABASE project_database";
 
 ### Install Magento Project via cli
 ```sh
-bin/magento setup:install --base-url=http://tutorial.magento2.dev \
+bin/magento setup:install --base-url=http://magento.test \
 --db-host=localhost \
---db-name=project_database \
+--db-name=database \
 --db-user=root \
---db-password=password \
---admin-firstname=Magento \
---admin-lastname=User \
+--db-password=root \
+--admin-firstname=System \
+--admin-lastname=Admin \
 --admin-email=user@example.com \
 --admin-user=admin \
 --admin-password=your_project_password \
---backend-frontname=admin123 \
+--backend-frontname=admin \
 --language=en_US \
 --currency=USD \
 --timezone=America/Chicago \
@@ -233,11 +233,8 @@ server {
 ### Installing Certbot
 ```sh
 sudo add-apt-repository ppa:certbot/certbot
-
 sudo apt-get update
-
 sudo apt-get install python-certbot-nginx
-
 sudo certbot --nginx -d example.com -d www.example.com
 
 ```
