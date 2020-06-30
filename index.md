@@ -1,14 +1,14 @@
 # Welcome MAZEAPI.COM
 
 ## Go to:
-1.  :arrow_forward: [Install server](#1)
-2.  :arrow_forward: [Switch default php version](#2)
-3.  :arrow_forward: [Install composer](#3)
-4.  :arrow_forward: [Magento nginx virtual host config](#4)
-5.  :arrow_forward: [Magento apache virtual host config](#5)
-6.  :arrow_forward: [Set Magento composer token](#6)
-7.  :arrow_forward: [Download Magento via composer](#7)
-8.  :arrow_forward: [Set project file permission](#8)
+1.  [Install server](#1)
+2.  [Switch default php version](#2)
+3.  [Install composer](#3)
+4.  [Magento nginx virtual host config](#4)
+5.  [Magento apache virtual host config](#5)
+6.  [Set Magento composer token](#6)
+7.  [Download Magento via composer](#7)
+8.  [Set project file permission](#8)
 
 ### <a name="1"></a>Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
@@ -99,6 +99,7 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 
 ### <a name="8"></a>Give Project file specific Permission
 ```sh
+sudo find app/ bin/ pub/ -type d -exec chmod 755 {} \; && sudo find index.php app/ bin/ pub/ -type f -exec chmod 644 {} \; && sudo chmod -R 777 pub/static var generated;
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +;
 find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +;
 chown -R :www-data .;
