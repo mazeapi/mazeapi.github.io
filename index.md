@@ -99,7 +99,12 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 
 ### <a name="8"></a>Give Project file specific Permission
 ```sh
-sudo find app/ bin/ pub/ -type d -exec chmod 755 {} \; && sudo find index.php app/ bin/ pub/ -type f -exec chmod 644 {} \; && sudo chmod -R 777 pub/static var generated;
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+find var pub/static pub/media  generated/ app/etc -type f -exec chmod g+w {} \;
+find var pub/static pub/media generated/ app/etc -type d -exec chmod g+ws {} \;
+chmod u+x bin/magento;
+
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +;
 find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +;
 chown -R :www-data .;
