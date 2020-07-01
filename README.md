@@ -429,3 +429,10 @@ fastcgi_buffer_size 32k;
 
 $ sudo service nginx reload/restart
 ```
+
+## sudo without password
+```sh
+sudo visudo
+# at the end of the file add
+username ALL=(ALL) NOPASSWD:ALL
+```
