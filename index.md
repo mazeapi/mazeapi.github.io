@@ -320,7 +320,7 @@ $ sudo systemctl restart varnish
 **if you have redirect issue arise remove rewrite condition in apache2 virtual hosts**
 
 **nginx ssl config**
-> in server node
+***in server node***
 ```sh
 location / {
         proxy_pass http://127.0.0.1:80;
