@@ -1,4 +1,4 @@
-# Welcome MAZEAPI.COM
+# Welcome playmagento.com
 
 ## Go to:
 1.  [Install server](#1)
