@@ -9,6 +9,10 @@
 6.  [Set Magento composer token](#6)
 7.  [Download Magento via composer](#7)
 8.  [Set project file permission](#8)
+9.  [Create Database](#9)
+10. [Install via cli](#10)
+11. [Install sample data](#11)
+12. [Deply Magento Project](#12)
 
 ### <a name="1"></a>Install Nignx/Apache, PHP, Mysql & other utilities
 ```sh
@@ -111,13 +115,13 @@ chown -R :www-data .;
 chmod u+x bin/magento;
 ```
 
-### Create Database
+### <a name="9"></a>Create Database
 ```sh
 sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'";
 mysql -uroot -p -e "CREATE DATABASE project_database";
 ```
 
-### Install Magento Project via cli
+### <a name="10"></a>Install Magento Project via cli
 ```sh
 bin/magento setup:install --base-url=http://magento.test \
 --db-host=localhost \
@@ -128,13 +132,31 @@ bin/magento setup:install --base-url=http://magento.test \
 --admin-lastname=Admin \
 --admin-email=user@example.com \
 --admin-user=admin \
---admin-password=your_project_password \
+--admin-password=admin \
 --backend-frontname=admin \
 --language=en_US \
 --currency=USD \
 --timezone=America/Chicago \
 --use-rewrites=1
 ```
+
+### <a name="11"></a>Magento get Sample Data
+```sh
+$ wget https://github.com/magento/magento2-sample-data/archive/2.3.5.zip -O sampledata.zip
+$ unzip sampledata.zip
+$ php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php -- --ce-source="<path_to_your_magento_instance>"
+# example
+$ php -f magento2-sample-data-2.3.5/dev/tools/build-sample-data.php -- --ce-source="."
+$ sudo chmod -R 777 magento2-sample-data-2.3.5/pub
+```
+
+### <a name="12"></a>Deploy Magento 2 project
+```sh
+$ php bin/magento deploy:mode:set production --skip-compilation
+$ php bin/magento setup:static-content:deploy sv_SE -a frontend
+$ php bin/magento setup:static-content:deploy en_US -a adminhtml
+```
+
 ### Auto start Lemp/Lamp services
 ```sh
 sudo systemctl enable apapche2;
@@ -142,6 +164,7 @@ sudo systemctl enable php7.3-fpm;
 sudo systemctl enable nginx;
 sudo systemctl enable mysql;
 ```
+
 ### Swap memory for Ubuntu
 ```sh
 sudo fallocate -l 1G /swapfile;
@@ -151,12 +174,6 @@ sudo swapon /swapfile;
 echo '/swapfile swap swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
-### Deploy Magento 2 project
-```sh
-$ php bin/magento deploy:mode:set production --skip-compilation
-$ php bin/magento setup:static-content:deploy sv_SE -a frontend
-$ php bin/magento setup:static-content:deploy en_US -a adminhtml
-```
 
 ### Delele all existing products & categories from Database
 ```sh
@@ -248,14 +265,6 @@ sudo certbot --nginx -d example.com -d www.example.com
 ```sh
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-```
-
-### Magento get Sample Data
-```sh
-$ wget https://github.com/magento/magento2-sample-data/archive/2.3.3.zip -O sampledata.zip
-$ unzip sampledata.zip
-$ php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php -- --ce-source="<path_to_your_magento_instance>"
-$ sudo chmod -R 777 <sample-data_clone_dir>/pub
 ```
 
 ### Varnish Magento 2
